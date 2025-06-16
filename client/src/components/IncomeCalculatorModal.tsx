@@ -222,7 +222,7 @@ export default function IncomeCalculatorModal({
               </div>
 
               <div className="text-xs text-muted-foreground mb-3">
-                * Приблизительный расчет. Фактический доход может отличаться в зависимости от района работы и количества заказов.
+                * Приблизительный расчет. Фактический доход может отличаться в зависимости от загруженности и количества заказов.
               </div>
 
               <div className="text-center">

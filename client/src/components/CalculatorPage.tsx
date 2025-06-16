@@ -199,7 +199,7 @@ export default function CalculatorPage() {
               </div>
 
               <div className="text-sm text-muted-foreground mt-4 mb-6 bg-secondary/5 p-3 rounded-lg">
-                * Приблизительный расчет. Фактический доход может отличаться в зависимости от района работы и количества заказов.
+                * Приблизительный расчет. Фактический доход может отличаться в зависимости от загруженности и количества заказов.
               </div>
 
               <div className="text-center">

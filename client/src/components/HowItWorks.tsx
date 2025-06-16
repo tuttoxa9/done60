@@ -34,7 +34,7 @@ export default function HowItWorks() {
       number: 3,
       icon: <Bike className="h-5 w-5" />,
       title: "Начни зарабатывать в тот же день",
-      description: "Получи доступ к приложению и выполняй первые заказы уже сегодня",
+      description: "Получи доступ к Яндекс Доставке и выполняй первые заказы уже сегодня",
       color: "primary"
     }
   ];
