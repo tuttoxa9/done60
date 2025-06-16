@@ -22,8 +22,8 @@ const fadeFromBlur = {
 function IridescenceBackground() {
   return (
     <>
-      {/* Iridescence Background */}
-      <div className="fixed inset-0 -z-10">
+      {/* Десктопная WebGL анимация */}
+      <div className="fixed inset-0 -z-10 hidden md:block">
         <Iridescence
           color={[0.8, 0.9, 1]}
           speed={0.3}
@@ -31,6 +31,10 @@ function IridescenceBackground() {
           mouseReact={true}
         />
       </div>
+
+      {/* Упрощенный фон для мобильных */}
+      <div className="fixed inset-0 -z-10 md:hidden bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100"></div>
+
       {/* Overlay для лучшей читаемости */}
       <div className="fixed inset-0 bg-white/60 -z-5"></div>
     </>
