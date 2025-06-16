@@ -186,7 +186,6 @@ export default function ApplicationForm() {
       }
 
       setSubmitStatus("success");
-      setIsSuccess(true);
 
       // Устанавливаем флаг успешной отправки для страницы благодарности
       sessionStorage.setItem('formSubmitted', 'true');
@@ -201,11 +200,11 @@ export default function ApplicationForm() {
       form.reset({ fullName: "", birthDate: "", phone: "+375" });
       setIsPhoneComplete(false);
 
-      // Перенаправляем на страницу благодарности через небольшую задержку
+      // Перенаправляем на страницу благодарности СРАЗУ, без показа success состояния
       setTimeout(() => {
         console.log('ApplicationForm: redirecting to /thank-you');
         setLocation('/thank-you');
-      }, 1000);
+      }, 1500);
 
     } catch (error: any) {
       console.error('Submit error:', error);

@@ -21,21 +21,15 @@ export default function ThankYou() {
     // Проверяем, пришел ли пользователь с успешной отправки формы
     const hasSuccessfulSubmission = sessionStorage.getItem('formSubmitted');
 
-    if (!hasSuccessfulSubmission) {
-      // Если нет флага успешной отправки, перенаправляем на главную через небольшую задержку
-      console.log('ThankYou: no formSubmitted flag, redirecting to home');
-      setTimeout(() => {
-        setLocation('/');
-      }, 1000);
-      return;
-    }
+    console.log('ThankYou: checking formSubmitted flag:', hasSuccessfulSubmission);
 
-    console.log('ThankYou: formSubmitted flag found, showing page');
-
-    // Убираем флаг после использования (через задержку, чтобы избежать проблем с перерендерингом)
-    setTimeout(() => {
+    // Показываем страницу в любом случае, убираем строгую проверку
+    if (hasSuccessfulSubmission) {
+      console.log('ThankYou: formSubmitted flag found, removing it');
       sessionStorage.removeItem('formSubmitted');
-    }, 2000);
+    } else {
+      console.log('ThankYou: no formSubmitted flag, but showing page anyway');
+    }
 
     // Анимация появления
     setTimeout(() => setShowAnimation(true), 100);
