@@ -5,6 +5,7 @@ import HowToStart from "@/components/HowToStart";
 import ApplicationForm from "@/components/ApplicationForm";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+import Iridescence from "@/components/Iridescence";
 
 // Эффект анимации с размытием - полная версия для всех устройств
 const fadeFromBlur = {
@@ -17,31 +18,39 @@ const fadeFromBlur = {
   }
 };
 
-// Полный декоративный фон для всех устройств
-function FullBackground() {
+// Iridescence фон для всей страницы
+function IridescenceBackground() {
   return (
-    <div className="relative overflow-hidden">
-      <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-amber-100/40 to-transparent"></div>
-      <div className="absolute -bottom-4 right-1/4 w-64 h-64 rounded-full bg-gradient-to-tr from-yellow-300/20 to-amber-200/30 blur-3xl"></div>
-      <div className="absolute -bottom-4 left-1/3 w-72 h-72 rounded-full bg-gradient-to-tr from-yellow-400/15 to-amber-300/20 blur-3xl"></div>
-    </div>
+    <>
+      {/* Iridescence Background */}
+      <div className="fixed inset-0 -z-10">
+        <Iridescence
+          color={[0.8, 0.9, 1]}
+          speed={0.2}
+          amplitude={0.03}
+          mouseReact={true}
+        />
+      </div>
+      {/* Overlay для лучшей читаемости */}
+      <div className="fixed inset-0 bg-white/75 -z-5"></div>
+    </>
   );
 }
 
 export default function Home() {
   return (
     <motion.div
-      className="min-h-screen flex flex-col"
+      className="min-h-screen flex flex-col relative"
       initial="hidden"
       animate="visible"
       variants={fadeFromBlur}
     >
+      <IridescenceBackground />
       <Header />
-      <main className="content-wrapper">
+      <main className="content-wrapper relative z-10">
         <Hero />
         <HowToStart />
         <ApplicationForm />
-        <FullBackground />
       </main>
       <Footer />
       <StickyMobileCTA />
