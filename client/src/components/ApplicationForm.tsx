@@ -190,6 +190,7 @@ export default function ApplicationForm() {
 
       // Устанавливаем флаг успешной отправки для страницы благодарности
       sessionStorage.setItem('formSubmitted', 'true');
+      console.log('ApplicationForm: set formSubmitted flag to true');
 
       toast({
         title: 'Заявка отправлена!',
@@ -202,6 +203,7 @@ export default function ApplicationForm() {
 
       // Перенаправляем на страницу благодарности через небольшую задержку
       setTimeout(() => {
+        console.log('ApplicationForm: redirecting to /thank-you');
         setLocation('/thank-you');
       }, 1000);
 
