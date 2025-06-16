@@ -188,11 +188,15 @@ export default function Hero() {
               Зарабатывай <span className="animated-gradient-text animate-text-gradient">2000-5000 BYN</span> курьером в Минске
             </h1>
             <p className="text-lg text-foreground/70 mb-6 max-w-xl">
-              Доставляй еду по всему Минску: Фрунзенский, Центральный, Советский и другие районы
-              <br />
+              <span className="hidden md:block">
+                Доставляй еду по всему Минску: Фрунзенский, Центральный, Советский и другие районы
+                <br />
+              </span>
               Свободный график • Выплаты 3 раза в неделю • Работа с 16 лет
               <br />
-              <strong>95% курьеров получают первый заказ в течение часа</strong>
+              <span className="hidden md:block">
+                <strong>95% курьеров получают первый заказ в течение часа</strong>
+              </span>
             </p>
             <div className="mt-4 bg-white/80 p-4 rounded-xl border border-primary/10 shadow-md">
               <div className="flex items-center gap-3 mb-2">

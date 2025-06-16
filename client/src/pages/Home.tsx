@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import HowToStart from "@/components/HowToStart";
-import FAQ from "@/components/FAQ";
 import ApplicationForm from "@/components/ApplicationForm";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
@@ -41,7 +40,6 @@ export default function Home() {
       <main className="content-wrapper">
         <Hero />
         <HowToStart />
-        <FAQ />
         <ApplicationForm />
         <FullBackground />
       </main>

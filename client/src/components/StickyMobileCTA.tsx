@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -45,7 +46,7 @@ export default function StickyMobileCTA() {
 
   if (!isMobile) return null;
 
-  return (
+  const stickyButton = (
     <AnimatePresence>
       {isVisible && (
         <motion.div
@@ -53,8 +54,20 @@ export default function StickyMobileCTA() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-lg p-4 safe-area-pb"
-          style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
+          className="sticky-mobile-cta"
+          style={{
+            position: 'fixed',
+            bottom: '0',
+            left: '0',
+            right: '0',
+            zIndex: 9999,
+            background: 'rgba(255, 255, 255, 0.98)',
+            backdropFilter: 'blur(8px)',
+            borderTop: '1px solid #e5e7eb',
+            boxShadow: '0 -4px 6px -1px rgba(0, 0, 0, 0.1)',
+            padding: '1rem',
+            paddingBottom: 'max(1rem, env(safe-area-inset-bottom))'
+          }}
         >
           <div className="flex gap-3 max-w-sm mx-auto">
             {/* Основная CTA кнопка */}
@@ -88,4 +101,6 @@ export default function StickyMobileCTA() {
       )}
     </AnimatePresence>
   );
+
+  return createPortal(stickyButton, document.body);
 }
