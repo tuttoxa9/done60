@@ -155,8 +155,8 @@ export default function Footer() {
         <div className="pt-10 border-t border-slate-800/80 text-center text-slate-500 text-sm flex flex-col md:flex-row justify-between items-center gap-4">
           <p>© {currentYear} ЮНИК. Все права защищены.</p>
           <div className="flex space-x-6">
-            <a href="#" className="text-slate-500 hover:text-white transition-colors duration-300">Политика конфиденциальности</a>
-            <a href="#" className="text-slate-500 hover:text-white transition-colors duration-300">Условия использования</a>
+            <Link href="/privacy-policy" className="text-slate-500 hover:text-white transition-colors duration-300">Политика конфиденциальности</Link>
+            <Link href="/terms-of-service" className="text-slate-500 hover:text-white transition-colors duration-300">Условия использования</Link>
           </div>
         </div>
       </div>

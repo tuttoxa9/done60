@@ -88,7 +88,7 @@
   @media (max-width: 767px) {
     body {
       background-color: #fdfdfd;
-      background-image: linear-gradient(to bottom, rgba(147, 197, 253, 0.2) 0%, transparent 100%);
+      background-image: linear-gradient(to bottom, rgba(147, 197, 253, 0.08) 0%, rgba(147, 197, 253, 0.02) 50%, transparent 100%);
       background-attachment: scroll;
     }
   }

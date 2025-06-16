@@ -41,10 +41,16 @@ type FormValues = z.infer<typeof formSchema>;
 function BackgroundElements() {
   return (
     <div className="absolute inset-0 overflow-hidden -z-10">
-      <div className="absolute top-10 right-[5%] w-48 h-48 bg-primary/30 rounded-full filter blur-[60px]"></div>
-      <div className="absolute top-[30%] left-[10%] w-56 h-56 bg-secondary/30 rounded-full filter blur-[50px]"></div>
-      <div className="absolute bottom-[15%] right-[15%] w-64 h-64 bg-pink-500/20 rounded-full filter blur-[70px]"></div>
-      <div className="absolute top-[15%] left-[30%] w-40 h-40 bg-indigo-500/15 rounded-full filter blur-[80px]"></div>
+      {/* Более деликатные фоновые элементы для десктопа */}
+      <div className="hidden md:block absolute top-10 right-[5%] w-48 h-48 bg-primary/30 rounded-full filter blur-[60px]"></div>
+      <div className="hidden md:block absolute top-[30%] left-[10%] w-56 h-56 bg-secondary/30 rounded-full filter blur-[50px]"></div>
+      <div className="hidden md:block absolute bottom-[15%] right-[15%] w-64 h-64 bg-pink-500/20 rounded-full filter blur-[70px]"></div>
+      <div className="hidden md:block absolute top-[15%] left-[30%] w-40 h-40 bg-indigo-500/15 rounded-full filter blur-[80px]"></div>
+
+      {/* Очень деликатные элементы для мобильных устройств */}
+      <div className="md:hidden absolute top-10 right-[10%] w-32 h-32 bg-primary/10 rounded-full filter blur-[40px]"></div>
+      <div className="md:hidden absolute top-[40%] left-[5%] w-40 h-40 bg-secondary/8 rounded-full filter blur-[50px]"></div>
+      <div className="md:hidden absolute bottom-[20%] right-[20%] w-36 h-36 bg-indigo-500/6 rounded-full filter blur-[60px]"></div>
     </div>
   );
 }
