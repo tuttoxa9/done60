@@ -185,7 +185,7 @@ export default function Hero() {
               <span>Средний доход 2500 BYN/месяц</span>
             </div>
             <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl mb-5 leading-tight tracking-tight">
-              Зарабатывай <span className="animated-gradient-text animate-text-gradient">2000-5000 BYN</span> курьером в Минске
+              Зарабатывай <span className="animated-gradient-text animate-text-gradient">2000-5000 BYN</span><br />курьером в Минске
             </h1>
             <p className="text-lg text-foreground/70 mb-6 max-w-xl">
               <span className="hidden md:block">
