@@ -185,7 +185,7 @@ export default function Hero() {
               <span>Средний доход 2500 BYN/месяц</span>
             </div>
             <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl mb-5 leading-tight tracking-tight">
-              Зарабатывай <span className="animated-gradient-text animate-text-gradient">2000-5000 BYN</span><br />курьером в Минске
+              Зарабатывай<br /><span className="animated-gradient-text animate-text-gradient">2000-5000 BYN</span><br />курьером в Минске
             </h1>
             <p className="text-lg text-foreground/70 mb-6 max-w-xl">
               <span className="hidden md:block">
@@ -193,10 +193,6 @@ export default function Hero() {
                 <br />
               </span>
               Свободный график • Выплаты 3 раза в неделю • Работа с 16 лет
-              <br />
-              <span className="hidden md:block">
-                <strong>95% курьеров получают первый заказ в течение часа</strong>
-              </span>
             </p>
             <div className="mt-4 bg-white/80 p-4 rounded-xl border border-primary/10 shadow-md">
               <div className="flex items-center gap-3 mb-2">
