@@ -5,6 +5,7 @@ import HowToStart from "@/components/HowToStart";
 import FAQ from "@/components/FAQ";
 import ApplicationForm from "@/components/ApplicationForm";
 import Footer from "@/components/Footer";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
 
 // Эффект анимации с размытием - полная версия для всех устройств
 const fadeFromBlur = {
@@ -45,6 +46,7 @@ export default function Home() {
         <FullBackground />
       </main>
       <Footer />
+      <StickyMobileCTA />
     </motion.div>
   );
 }
