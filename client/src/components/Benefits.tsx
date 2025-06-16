@@ -10,18 +10,18 @@ export default function Benefits() {
   const additionalBenefits = [
     {
       icon: <Clock className="h-5 w-5 text-primary" />,
-      title: "Гибкий график",
-      description: "Работай когда удобно — утром, днем или вечером"
+      title: "Полная свобода",
+      description: "Работайте когда хотите — без обязательных смен и графиков"
     },
     {
       icon: <Shield className="h-5 w-5 text-secondary" />,
-      title: "Стабильно",
-      description: "Выплаты 3 раза в неделю без задержек"
+      title: "Гарантированные выплаты",
+      description: "Выплаты 3 раза в неделю, первая через 3 дня работы"
     },
     {
       icon: <Award className="h-5 w-5 text-primary" />,
-      title: "Бонусы",
-      description: "Дополнительные бонусы за выполненные заказы"
+      title: "Высокий доход",
+      description: "Средний заработок 2500 BYN/месяц, до 5000 BYN при полной занятости"
     }
   ];
 
@@ -33,12 +33,12 @@ export default function Benefits() {
             Преимущества работы у нас
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
-            Почему курьеры выбирают <span className="gradient-text inline-flex items-center gap-2">
+            Более 500 курьеров уже работают с <span className="gradient-text inline-flex items-center gap-2">
               <ShaderLogo width="35px" height="35px" /> ЮНИК
             </span>
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Мы создаем технологичные и комфортные условия для наших курьеров
+            Лучшие условия работы в Минске: высокие доходы, честные выплаты, поддержка 24/7
           </p>
         </div>
 
@@ -59,8 +59,8 @@ export default function Benefits() {
                 </picture>
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 via-transparent to-transparent opacity-80"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                  <h3 className="text-2xl font-bold text-white mb-2">Стань курьером ЮНИК</h3>
-                  <p className="text-white/90">Начни зарабатывать уже сегодня</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">Присоединяйся к команде</h3>
+                  <p className="text-white/90">Первый заказ в течение часа после регистрации</p>
                 </div>
               </div>
             </div>

@@ -182,14 +182,15 @@ export default function Hero() {
           <div className="lg:w-1/2 z-10">
             <div className="inline-flex items-center px-4 py-2 mb-4 rounded-full bg-primary/10 border border-primary/20 text-sm text-primary font-medium">
               <Zap size={14} className="mr-2" />
-              <span>Начни зарабатывать быстро и легко</span>
+              <span>Средний доход 2500 BYN/месяц</span>
             </div>
             <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl mb-5 leading-tight tracking-tight">
-              Твой <span className="animated-gradient-text animate-text-gradient">быстрый старт</span> в доставке
+              Зарабатывай <span className="animated-gradient-text animate-text-gradient">2000-5000 BYN</span> курьером в Минске
             </h1>
             <p className="text-lg text-foreground/70 mb-6 max-w-xl">
-              Стань курьером с частыми выплатами и гибким графиком.
-              Доступно с 16 лет на любой платформе (iOS/Android)
+              Свободный график • Выплаты 3 раза в неделю • Работа с 16 лет
+              <br />
+              <strong>95% курьеров получают первый заказ в течение часа</strong>
             </p>
             <div className="mt-4 bg-white/80 p-4 rounded-xl border border-primary/10 shadow-md">
               <div className="flex items-center gap-3 mb-2">
@@ -206,8 +207,8 @@ export default function Hero() {
                   <Wallet className="text-primary h-4 w-4" />
                 </div>
                 <div>
-                  <span className="font-medium">Стабильный доход</span>
-                  <p className="text-sm text-foreground/70">До 5000 BYN/мес при полной занятости</p>
+                  <span className="font-medium">Быстрые выплаты</span>
+                  <p className="text-sm text-foreground/70">Первая выплата через 3 дня работы</p>
                 </div>
               </div>
             </div>
@@ -221,8 +222,8 @@ export default function Hero() {
                     <div className="p-4 pt-4 m-0 w-full opacity-100 transition-opacity duration-300"
                     >
                       <div className="text-center mb-5">
-                        <h3 className="text-lg font-semibold mb-1">Начни работать с нами</h3>
-                        <p className="text-xs text-muted-foreground">Заполните форму и начните зарабатывать уже сегодня</p>
+                        <h3 className="text-lg font-semibold mb-1">Получить звонок за 15 минут</h3>
+                        <p className="text-xs text-muted-foreground">Оставьте заявку и начните зарабатывать уже завтра</p>
                       </div>
                       {isSuccess ? (
                         <div className="h-full text-center py-4 flex flex-col justify-center items-center">
@@ -292,7 +293,7 @@ export default function Hero() {
                                 </div>
                               ) : (
                                 <div className="flex items-center justify-center gap-2 group-hover:translate-x-1 transition-transform">
-                                  Отправить <Send className="h-4 w-4 ml-1" />
+                                  Начать зарабатывать <Send className="h-4 w-4 ml-1" />
                                 </div>
                               )}
                               <div className="absolute inset-0 bg-white/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-lg"></div>

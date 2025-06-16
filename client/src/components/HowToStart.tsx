@@ -67,12 +67,12 @@ export default function HowToStart() {
             Как начать работать
           </span>
           <h2 className="text-2xl md:text-4xl font-bold mb-3 tracking-tight">
-            Пошаговая инструкция для <span className="gradient-text inline-flex items-center gap-2">
+            Полное руководство для <span className="gradient-text inline-flex items-center gap-2">
               <ShaderLogo width={isMobile ? "25px" : "35px"} height={isMobile ? "25px" : "35px"} /> курьеров
             </span>
           </h2>
           <p className="text-base md:text-lg text-muted-foreground mb-6">
-            Всё, что нужно знать о начале работы, в простых шагах
+            Подробная информация об условиях работы, требованиях и возможностях заработка
           </p>
         </div>
 
@@ -91,8 +91,8 @@ export default function HowToStart() {
                 </picture>
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 via-transparent to-transparent opacity-80"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/80 to-transparent">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">Начни прямо сейчас</h3>
-                  <p className="text-sm md:text-base text-white/90">Всего несколько простых шагов</p>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">Стань частью команды</h3>
+                  <p className="text-sm md:text-base text-white/90">Более 500 курьеров уже зарабатывают с нами</p>
                 </div>
               </div>
             </div>

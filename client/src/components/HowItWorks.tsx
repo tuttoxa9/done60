@@ -19,22 +19,22 @@ export default function HowItWorks() {
     {
       number: 1,
       icon: <FileText className="h-5 w-5" />,
-      title: "Заполни заявку",
-      description: "Заполни простую форму на сайте, указав контактные данные",
+      title: "Оставь заявку за 30 секунд",
+      description: "Заполни простую форму — нужны только имя, дата рождения и телефон",
       color: "primary"
     },
     {
       number: 2,
       icon: <PhoneCall className="h-5 w-5" />,
-      title: "Дождись звонка",
-      description: "Менеджер свяжется с тобой в течение 15 минут",
+      title: "Получи звонок за 15 минут",
+      description: "Менеджер свяжется для подтверждения данных и объяснит следующие шаги",
       color: "secondary"
     },
     {
       number: 3,
       icon: <Bike className="h-5 w-5" />,
-      title: "Начинай работать",
-      description: "Получи доступ к приложению и выполняй заказы",
+      title: "Начни зарабатывать в тот же день",
+      description: "Получи доступ к приложению и выполняй первые заказы уже сегодня",
       color: "primary"
     }
   ];
@@ -72,10 +72,10 @@ export default function HowItWorks() {
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-500 via-purple-500 via-pink-500 to-secondary animate-text-gradient font-bold">Быстрый старт</span>
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
-            Как начать <span className="gradient-text">работать</span> с нами
+            3 простых шага до <span className="gradient-text">первого заказа</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Три простых шага для начала работы и получения стабильного дохода
+            Начните зарабатывать уже сегодня — процесс регистрации занимает всего 15 минут
           </p>
         </div>
 
