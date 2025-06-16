@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
+import { mockSubmitApplication } from "@/lib/mockApi";
 import {
   Button,
   Input,
@@ -51,6 +53,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function ApplicationForm() {
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isPhoneComplete, setIsPhoneComplete] = useState(false);
@@ -144,19 +147,33 @@ export default function ApplicationForm() {
     setErrorMessage("");
 
     try {
-      const response = await fetch('/.netlify/functions/applications', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      // Используем mock API в разработке
+      const isDevelopment = import.meta.env.DEV;
+      let response: any;
+
+      if (isDevelopment) {
+        response = await mockSubmitApplication({
           fullName: values.fullName,
           birthDate: values.birthDate,
           phone: values.phone
-        }),
-      });
+        });
+      } else {
+        response = await fetch('/.netlify/functions/applications', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fullName: values.fullName,
+            birthDate: values.birthDate,
+            phone: values.phone
+          }),
+        });
+      }
 
       let responseData = null;
       try {
-        if (response.headers.get('content-type')?.includes('application/json')) {
+        if (isDevelopment) {
+          responseData = await response.json();
+        } else if (response.headers.get('content-type')?.includes('application/json')) {
           responseData = await response.json();
         }
       } catch (e) {
@@ -170,18 +187,23 @@ export default function ApplicationForm() {
 
       setSubmitStatus("success");
       setIsSuccess(true);
+
+      // Устанавливаем флаг успешной отправки для страницы благодарности
+      sessionStorage.setItem('formSubmitted', 'true');
+
       toast({
         title: 'Заявка отправлена!',
-        description: 'Мы получили вашу заявку и скоро с вами свяжемся.',
+        description: 'Перенаправляем на страницу подтверждения...',
         variant: 'default'
       });
 
       form.reset({ fullName: "", birthDate: "", phone: "+375" });
       setIsPhoneComplete(false);
 
+      // Перенаправляем на страницу благодарности через небольшую задержку
       setTimeout(() => {
-        document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
+        setLocation('/thank-you');
+      }, 1000);
 
     } catch (error: any) {
       console.error('Submit error:', error);
