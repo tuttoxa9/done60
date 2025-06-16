@@ -1,5 +1,5 @@
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 const vertexShader = `
 attribute vec2 uv;
@@ -53,28 +53,61 @@ export default function Iridescence({
 }) {
   const ctnDom = useRef(null);
   const mousePos = useRef({ x: 0.5, y: 0.5 });
+  const rendererRef = useRef(null);
+  const programRef = useRef(null);
+  const animateIdRef = useRef(null);
+  const isInitialized = useRef(false);
+
+  // Функция для обновления uniform значений без пересоздания контекста
+  const updateUniforms = useCallback(() => {
+    if (programRef.current) {
+      programRef.current.uniforms.uColor.value = new Color(...color);
+      programRef.current.uniforms.uAmplitude.value = amplitude;
+      programRef.current.uniforms.uSpeed.value = speed;
+    }
+  }, [color, speed, amplitude]);
 
   useEffect(() => {
-    if (!ctnDom.current) return;
+    updateUniforms();
+  }, [updateUniforms]);
+
+  useEffect(() => {
+    if (!ctnDom.current || isInitialized.current) return;
+
     const ctn = ctnDom.current;
-    const renderer = new Renderer();
+    const renderer = new Renderer({
+      alpha: true,
+      premultipliedAlpha: false,
+    });
+    rendererRef.current = renderer;
+
     const gl = renderer.gl;
-    gl.clearColor(1, 1, 1, 1);
+    gl.clearColor(1, 1, 1, 0); // Прозрачный фон
 
     let program;
 
     function resize() {
-      const scale = 1;
-      renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
+      const scale = Math.min(window.devicePixelRatio || 1, 2); // Ограничиваем DPR для производительности
+      const width = ctn.offsetWidth * scale;
+      const height = ctn.offsetHeight * scale;
+
+      renderer.setSize(width, height);
       if (program) {
         program.uniforms.uResolution.value = new Color(
-          gl.canvas.width,
-          gl.canvas.height,
-          gl.canvas.width / gl.canvas.height
+          width,
+          height,
+          width / height
         );
       }
     }
-    window.addEventListener("resize", resize, false);
+
+    const resizeHandler = () => {
+      // Debounce resize для производительности
+      clearTimeout(resize.timeout);
+      resize.timeout = setTimeout(resize, 16);
+    };
+
+    window.addEventListener("resize", resizeHandler, { passive: true });
     resize();
 
     const geometry = new Triangle(gl);
@@ -97,15 +130,30 @@ export default function Iridescence({
       },
     });
 
+    programRef.current = program;
+
     const mesh = new Mesh(gl, { geometry, program });
-    let animateId;
+    let lastTime = 0;
+    const targetFPS = 60;
+    const frameDelay = 1000 / targetFPS;
 
     function update(t) {
-      animateId = requestAnimationFrame(update);
-      program.uniforms.uTime.value = t * 0.001;
-      renderer.render({ scene: mesh });
+      animateIdRef.current = requestAnimationFrame(update);
+
+      // Throttle to target FPS для лучшей производительности
+      if (t - lastTime >= frameDelay) {
+        program.uniforms.uTime.value = t * 0.001;
+        renderer.render({ scene: mesh });
+        lastTime = t;
+      }
     }
-    animateId = requestAnimationFrame(update);
+
+    animateIdRef.current = requestAnimationFrame(update);
+
+    // Добавляем canvas с better styling
+    gl.canvas.style.width = '100%';
+    gl.canvas.style.height = '100%';
+    gl.canvas.style.display = 'block';
     ctn.appendChild(gl.canvas);
 
     function handleMouseMove(e) {
@@ -113,24 +161,51 @@ export default function Iridescence({
       const x = (e.clientX - rect.left) / rect.width;
       const y = 1.0 - (e.clientY - rect.top) / rect.height;
       mousePos.current = { x, y };
-      program.uniforms.uMouse.value[0] = x;
-      program.uniforms.uMouse.value[1] = y;
-    }
-    if (mouseReact) {
-      ctn.addEventListener("mousemove", handleMouseMove);
+
+      if (program && program.uniforms.uMouse) {
+        program.uniforms.uMouse.value[0] = x;
+        program.uniforms.uMouse.value[1] = y;
+      }
     }
 
+    if (mouseReact) {
+      ctn.addEventListener("mousemove", handleMouseMove, { passive: true });
+    }
+
+    isInitialized.current = true;
+
     return () => {
-      cancelAnimationFrame(animateId);
-      window.removeEventListener("resize", resize);
-      if (mouseReact) {
+      isInitialized.current = false;
+
+      if (animateIdRef.current) {
+        cancelAnimationFrame(animateIdRef.current);
+        animateIdRef.current = null;
+      }
+
+      window.removeEventListener("resize", resizeHandler);
+
+      if (mouseReact && ctn) {
         ctn.removeEventListener("mousemove", handleMouseMove);
       }
-      ctn.removeChild(gl.canvas);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
+
+      if (gl.canvas && ctn && ctn.contains(gl.canvas)) {
+        ctn.removeChild(gl.canvas);
+      }
+
+      // Graceful WebGL cleanup
+      try {
+        const loseContextExt = gl.getExtension("WEBGL_lose_context");
+        if (loseContextExt) {
+          loseContextExt.loseContext();
+        }
+      } catch (e) {
+        console.warn('WebGL context cleanup failed:', e);
+      }
+
+      rendererRef.current = null;
+      programRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [color, speed, amplitude, mouseReact]);
+  }, []); // Убираем зависимости, чтобы избежать пересоздания
 
   return (
     <div
