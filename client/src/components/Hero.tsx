@@ -7,6 +7,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from "@/lib/ui-components";
+import { useLocation } from "wouter";
 
 // Импорт иконок магазинов для предзагрузки
 import googlePlayIcon from "/icons/google-play.svg";
@@ -59,6 +60,7 @@ function PreloadImages() {
 }
 
 export default function Hero() {
+  const [, setLocation] = useLocation();
   const [activeFeature, setActiveFeature] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -154,6 +156,14 @@ export default function Hero() {
 
       setSubmitStatus("success");
       setIsSuccess(true);
+
+      // Устанавливаем флаг успешной отправки
+      sessionStorage.setItem('formSubmitted', 'true');
+
+      // Перенаправляем на страницу благодарности
+      setTimeout(() => {
+        setLocation('/thank-you');
+      }, 500); // Небольшая задержка для показа успешного состояния
 
       form.reset({
         fullName: "",

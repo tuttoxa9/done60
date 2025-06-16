@@ -3,8 +3,10 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MessageCircle, X, Send, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLocation } from "wouter";
 
 export default function StickyMobileCTA() {
+  const [, setLocation] = useLocation();
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -77,9 +79,14 @@ export default function StickyMobileCTA() {
 
       if (response.ok) {
         setIsSuccess(true);
+
+        // Устанавливаем флаг успешной отправки
+        sessionStorage.setItem('formSubmitted', 'true');
+
+        // Перенаправляем на страницу благодарности
         setTimeout(() => {
-          closeForm();
-        }, 2000);
+          setLocation('/thank-you');
+        }, 1500);
       }
     } catch (error) {
       console.error('Submit error:', error);
