@@ -26,13 +26,13 @@ function IridescenceBackground() {
       <div className="fixed inset-0 -z-10">
         <Iridescence
           color={[0.8, 0.9, 1]}
-          speed={0.2}
-          amplitude={0.03}
+          speed={0.3}
+          amplitude={0.15}
           mouseReact={true}
         />
       </div>
       {/* Overlay для лучшей читаемости */}
-      <div className="fixed inset-0 bg-white/75 -z-5"></div>
+      <div className="fixed inset-0 bg-white/60 -z-5"></div>
     </>
   );
 }
