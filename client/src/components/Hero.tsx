@@ -48,9 +48,9 @@ function BackgroundElements() {
       <div className="hidden md:block absolute top-[15%] left-[30%] w-40 h-40 bg-indigo-500/15 rounded-full filter blur-[80px]"></div>
 
       {/* Очень деликатные элементы для мобильных устройств */}
-      <div className="md:hidden absolute top-10 right-[10%] w-32 h-32 bg-primary/10 rounded-full filter blur-[40px]"></div>
-      <div className="md:hidden absolute top-[40%] left-[5%] w-40 h-40 bg-secondary/8 rounded-full filter blur-[50px]"></div>
-      <div className="md:hidden absolute bottom-[20%] right-[20%] w-36 h-36 bg-indigo-500/6 rounded-full filter blur-[60px]"></div>
+      <div className="md:hidden absolute top-16 right-[15%] w-24 h-24 bg-primary/6 rounded-full filter blur-[30px]"></div>
+      <div className="md:hidden absolute top-[50%] left-[10%] w-32 h-32 bg-secondary/4 rounded-full filter blur-[40px]"></div>
+      <div className="md:hidden absolute bottom-[30%] right-[25%] w-28 h-28 bg-indigo-500/3 rounded-full filter blur-[45px]"></div>
     </div>
   );
 }
