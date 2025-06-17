@@ -116,8 +116,8 @@ export default function StickyMobileCTA() {
             backdropFilter: 'blur(8px)',
             borderTop: '1px solid #e5e7eb',
             boxShadow: '0 -4px 6px -1px rgba(0, 0, 0, 0.1)',
-            padding: '1rem',
-            paddingBottom: 'max(1rem, env(safe-area-inset-bottom))'
+            padding: '0.75rem',
+            paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))'
           }}
         >
           {/* Форма быстрой заявки */}

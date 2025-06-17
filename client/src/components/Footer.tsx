@@ -34,7 +34,7 @@ export default function Footer() {
       variants={footerAnimation}
       initial="hidden"
       animate="show"
-      className="relative overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 text-white pt-28 pb-16"
+      className="relative overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 text-white pt-28 pb-24 md:pb-16"
     >
       {/* Background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">

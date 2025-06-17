@@ -48,9 +48,7 @@ function BackgroundElements() {
       <div className="hidden md:block absolute bottom-[15%] right-[15%] w-64 h-64 bg-pink-500/20 rounded-full filter blur-[70px]"></div>
       <div className="hidden md:block absolute top-[15%] left-[30%] w-40 h-40 bg-indigo-500/15 rounded-full filter blur-[80px]"></div>
 
-      {/* Упрощенные элементы для мобильных */}
-      <div className="md:hidden absolute top-20 right-8 w-24 h-24 bg-primary/10 rounded-full"></div>
-      <div className="md:hidden absolute bottom-32 left-6 w-20 h-20 bg-secondary/10 rounded-full"></div>
+      {/* Убираем фоновые элементы для мобильных - оставляем чистый фон */}
     </div>
   );
 }
