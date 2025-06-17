@@ -156,6 +156,38 @@ export default function ApplicationForm() {
         source: "application_form"
       });
 
+      // ТАКЖЕ отправляем в Telegram через Netlify функции
+      const response = await fetch('/.netlify/functions/applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: values.fullName,
+          birthDate: values.birthDate,
+          phone: values.phone
+        }),
+      });
+
+      // Проверяем ответ от Telegram
+      if (!response.ok) {
+        console.warn('Telegram notification failed, but Firebase save was successful');
+      }
+
+      // ТАКЖЕ отправляем в Telegram через Netlify функции
+      const response = await fetch('/.netlify/functions/applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: values.fullName,
+          birthDate: values.birthDate,
+          phone: values.phone
+        }),
+      });
+
+      // Проверяем ответ от Telegram
+      if (!response.ok) {
+        console.warn('Telegram notification failed, but Firebase save was successful');
+      }
+
       setSubmitStatus("success");
 
       // Устанавливаем флаг успешной отправки для страницы благодарности
