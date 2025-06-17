@@ -32,8 +32,8 @@ function IridescenceBackground() {
         />
       </div>
 
-      {/* Упрощенный фон для мобильных */}
-      <div className="fixed inset-0 -z-10 md:hidden bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100"></div>
+      {/* Мобильный фон - такой же как на кальуляторе и документальных страницах */}
+      <div className="fixed inset-0 -z-10 md:hidden mobile-gradient-background"></div>
 
       {/* Overlay для лучшей читаемости */}
       <div className="fixed inset-0 bg-white/60 -z-5"></div>
