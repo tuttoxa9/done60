@@ -18,8 +18,8 @@ const fadeFromBlur = {
   }
 };
 
-// Iridescence фон для всей страницы
-function IridescenceBackground() {
+// Фон для всей страницы
+function PageBackground() {
   return (
     <>
       {/* Десктопная WebGL анимация */}
@@ -30,13 +30,11 @@ function IridescenceBackground() {
           amplitude={0.15}
           mouseReact={true}
         />
+        {/* Overlay для лучшей читаемости - только на десктопе */}
+        <div className="absolute inset-0 bg-white/60 -z-5"></div>
       </div>
 
-      {/* Мобильный фон - такой же как на кальуляторе и документальных страницах */}
-      <div className="fixed inset-0 -z-10 md:hidden mobile-gradient-background"></div>
-
-      {/* Overlay для лучшей читаемости - только на десктопе */}
-      <div className="fixed inset-0 bg-white/60 -z-5 hidden md:block"></div>
+      {/* Для мобильных - никаких дополнительных элементов, только body CSS */}
     </>
   );
 }
@@ -49,7 +47,7 @@ export default function Home() {
       animate="visible"
       variants={fadeFromBlur}
     >
-      <IridescenceBackground />
+      <PageBackground />
       <Header />
       <main className="content-wrapper relative z-10">
         <Hero />
