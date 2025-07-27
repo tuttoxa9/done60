@@ -157,17 +157,6 @@ export default function ApplicationForm() {
       });
 
       // ТАКЖЕ отправляем в Telegram через Netlify функции
-      const response = await fetch('/.netlify/functions/applications', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fullName: values.fullName,
-          birthDate: values.birthDate,
-          phone: values.phone
-        }),
-      });
-
-      // ТАКЖЕ отправляем в Telegram через Netlify функции
       const telegramResponse = await fetch('/.netlify/functions/applications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -180,7 +169,9 @@ export default function ApplicationForm() {
 
       // Проверяем ответ от Telegram
       if (!telegramResponse.ok) {
-        console.warn('Telegram notification failed, but Firebase save was successful');
+        const errorText = await telegramResponse.text();
+        console.error('Telegram notification failed:', telegramResponse.status, errorText);
+        throw new Error(`Ошибка отправки: ${telegramResponse.status}`);
       }
 
       setSubmitStatus("success");

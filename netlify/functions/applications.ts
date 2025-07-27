@@ -17,10 +17,27 @@ interface QuickApplicationData {
 type ApplicationData = FullApplicationData | QuickApplicationData;
 
 const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
+  // CORS headers
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  };
+
+  // Handle OPTIONS request for CORS
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers,
+      body: '',
+    };
+  }
+
   // Проверка метода запроса
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
+      headers,
       body: JSON.stringify({ message: "Method Not Allowed" }),
     };
   }
@@ -33,6 +50,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     if (!data.phone) {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({ message: "Missing required field: phone" }),
       };
     }
@@ -49,10 +67,16 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
     // Проверка наличия переменных окружения
     if (!botToken || !chatId) {
-      console.error("Missing environment variables: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID");
+      console.error("Missing environment variables:");
+      console.error("TELEGRAM_BOT_TOKEN exists:", !!botToken);
+      console.error("TELEGRAM_CHAT_ID exists:", !!chatId);
       return {
         statusCode: 500,
-        body: JSON.stringify({ message: "Server configuration error" }),
+        headers,
+        body: JSON.stringify({
+          message: "Server configuration error",
+          details: `Missing: ${!botToken ? 'TELEGRAM_BOT_TOKEN ' : ''}${!chatId ? 'TELEGRAM_CHAT_ID' : ''}`
+        }),
       };
     }
 
@@ -85,11 +109,18 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     );
 
     if (!telegramResponse.ok) {
-      const telegramError = await telegramResponse.json();
-      console.error("Telegram API error:", telegramError);
+      const responseText = await telegramResponse.text();
+      console.error("Telegram API error:", responseText);
       console.error("Response status:", telegramResponse.status);
-      console.error("Response text:", await telegramResponse.text());
-      throw new Error(`Failed to send message to Telegram: ${telegramResponse.status}`);
+
+      let telegramError;
+      try {
+        telegramError = JSON.parse(responseText);
+      } catch (e) {
+        telegramError = { description: responseText };
+      }
+
+      throw new Error(`Failed to send message to Telegram: ${telegramResponse.status} - ${telegramError.description || responseText}`);
     }
 
     const telegramResult = await telegramResponse.json();
@@ -98,6 +129,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     // Возвращаем успешный ответ
     return {
       statusCode: 200,
+      headers,
       body: JSON.stringify({
         message: "Application submitted successfully",
         type: isFullApplication ? 'full' : 'quick'
@@ -111,6 +143,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({
         message: "Internal Server Error",
         error: error instanceof Error ? error.message : "Unknown error"

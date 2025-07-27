@@ -155,7 +155,9 @@ export default function Hero() {
 
       // Проверяем ответ от Telegram
       if (!telegramResponse.ok) {
-        console.warn('Telegram notification failed, but Firebase save was successful');
+        const errorText = await telegramResponse.text();
+        console.error('Telegram notification failed:', telegramResponse.status, errorText);
+        throw new Error(`Ошибка отправки: ${telegramResponse.status}`);
       }
 
       setSubmitStatus("success");
