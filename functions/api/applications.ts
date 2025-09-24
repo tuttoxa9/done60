@@ -1,4 +1,4 @@
-import { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
+// Cloudflare Worker function для обработки заявок
 
 // Интерфейс для полной заявки
 interface FullApplicationData {
@@ -16,43 +16,27 @@ interface QuickApplicationData {
 // Объединенный тип
 type ApplicationData = FullApplicationData | QuickApplicationData;
 
-const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
+export async function onRequestPost(context: any): Promise<Response> {
+  const { request, env } = context;
+
   // CORS headers
-  const headers = {
+  const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json',
   };
-
-  // Handle OPTIONS request for CORS
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers,
-      body: '',
-    };
-  }
-
-  // Проверка метода запроса
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers,
-      body: JSON.stringify({ message: "Method Not Allowed" }),
-    };
-  }
 
   try {
     // Получаем данные из тела запроса
-    const data: ApplicationData = JSON.parse(event.body || "{}");
+    const data: ApplicationData = await request.json();
 
     // Проверка наличия телефона (обязательное поле для всех типов заявок)
     if (!data.phone) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ message: "Missing required field: phone" }),
-      };
+      return new Response(
+        JSON.stringify({ message: "Missing required field: phone" }),
+        { status: 400, headers: corsHeaders }
+      );
     }
 
     // Определяем тип заявки
@@ -62,22 +46,21 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     console.log('Application type:', isFullApplication ? 'full' : 'quick', 'Data:', data);
 
     // Получаем токен бота и ID чата из переменных окружения
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+    const botToken = env.TELEGRAM_BOT_TOKEN;
+    const chatId = env.TELEGRAM_CHAT_ID;
 
     // Проверка наличия переменных окружения
     if (!botToken || !chatId) {
       console.error("Missing environment variables:");
       console.error("TELEGRAM_BOT_TOKEN exists:", !!botToken);
       console.error("TELEGRAM_CHAT_ID exists:", !!chatId);
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({
+      return new Response(
+        JSON.stringify({
           message: "Server configuration error",
           details: `Missing: ${!botToken ? 'TELEGRAM_BOT_TOKEN ' : ''}${!chatId ? 'TELEGRAM_CHAT_ID' : ''}`
         }),
-      };
+        { status: 500, headers: corsHeaders }
+      );
     }
 
     // Формируем сообщение для отправки в зависимости от типа заявки
@@ -127,29 +110,34 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     console.log("Message sent successfully to Telegram:", telegramResult);
 
     // Возвращаем успешный ответ
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({
+    return new Response(
+      JSON.stringify({
         message: "Application submitted successfully",
         type: isFullApplication ? 'full' : 'quick'
       }),
-    };
+      { status: 200, headers: corsHeaders }
+    );
   } catch (error) {
     console.error("Error processing application:", error);
-    console.error("Request body:", event.body);
-    console.error("Environment check - Bot token exists:", !!process.env.TELEGRAM_BOT_TOKEN);
-    console.error("Environment check - Chat ID exists:", !!process.env.TELEGRAM_CHAT_ID);
 
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({
+    return new Response(
+      JSON.stringify({
         message: "Internal Server Error",
         error: error instanceof Error ? error.message : "Unknown error"
       }),
-    };
+      { status: 500, headers: corsHeaders }
+    );
   }
-};
+}
 
-export { handler };
+// Обработка OPTIONS запросов для CORS
+export async function onRequestOptions(): Promise<Response> {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    },
+  });
+}

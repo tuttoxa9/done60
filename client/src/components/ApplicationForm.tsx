@@ -156,8 +156,8 @@ export default function ApplicationForm() {
         source: "application_form"
       });
 
-      // ТАКЖЕ отправляем в Telegram через Netlify функции
-      const telegramResponse = await fetch('/.netlify/functions/applications', {
+      // ТАКЖЕ отправляем в Telegram через Cloudflare Worker
+      const telegramResponse = await fetch('/api/applications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

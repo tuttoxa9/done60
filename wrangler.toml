@@ -1,0 +1,18 @@
+name = "done60"
+compatibility_date = "2024-09-24"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "done60"
+
+[[env.production.env_vars]]
+name = "TELEGRAM_BOT_TOKEN"
+value = ""
+
+[[env.production.env_vars]]
+name = "TELEGRAM_CHAT_ID"
+value = ""
+
+[build]
+command = "cd client && bun install && bun run build"
+destination = "client/dist"
