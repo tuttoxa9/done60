@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
-import { mockSubmitApplication } from "@/lib/mockApi";
-import { submitApplication } from "@/lib/firebase";
+
 import {
   Button,
   Input,
@@ -148,15 +147,7 @@ export default function ApplicationForm() {
     setErrorMessage("");
 
     try {
-      // Отправляем в Firebase (полная форма)
-      await submitApplication({
-        fullName: values.fullName,
-        birthDate: values.birthDate,
-        phone: values.phone,
-        source: "application_form"
-      });
-
-      // ТАКЖЕ отправляем в Telegram через Cloudflare Worker
+      // Отправляем в Telegram через Cloudflare Worker
       const telegramResponse = await fetch('/api/applications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
