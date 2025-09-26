@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from "@/lib/ui-components";
 import { useLocation } from "wouter";
-import { submitApplication } from "@/lib/firebase";
+
 
 // Импорт иконок магазинов для предзагрузки
 import googlePlayIcon from "/icons/google-play.svg";
@@ -134,16 +134,8 @@ export default function Hero() {
     setErrorMessage("");
 
     try {
-      // Отправляем в Firebase (форма в Hero)
-      await submitApplication({
-        fullName: values.fullName,
-        birthDate: values.birthDate,
-        phone: values.phone,
-        source: "hero_form"
-      });
-
-      // ТАКЖЕ отправляем в Telegram через Netlify функции
-      const telegramResponse = await fetch('/.netlify/functions/applications', {
+      // Отправляем в Telegram через Cloudflare Worker
+      const telegramResponse = await fetch('/api/applications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
