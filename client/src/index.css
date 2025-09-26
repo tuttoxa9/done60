@@ -357,18 +357,7 @@
     }
   }
 
-  .blur-header {
-    position: relative;
-    background: #fff;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    z-index: 50;
-  }
 
-  .blur-header::before,
-  .blur-header::after {
-    display: none !important;
-  }
 
   .feature-icon {
     @apply w-12 h-12 rounded-full flex items-center justify-center mb-4;
