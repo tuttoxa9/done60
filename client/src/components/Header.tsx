@@ -13,7 +13,8 @@ export default function Header() {
   return (
     <section style={{position: 'sticky', top: 0, height: 'auto', overflow: 'hidden', zIndex: 50}}>
       <div style={{ height: '100%', overflowY: 'auto', padding: '0.75rem 0' }}>
-        <div className="container-custom flex justify-between items-center">
+        {/* Контент поверх блюр эффекта */}
+        <div className="container-custom flex justify-between items-center relative z-10">
           <div>
             <Link href="/">
               <div className="text-3xl font-bold flex items-center gap-2 relative">
@@ -67,10 +68,9 @@ export default function Header() {
 
       <GradualBlur
         target="parent"
-        position="bottom"
-        height="6rem"
-        strength={2}
-        divCount={5}
+        preset="header"
+        strength={3}
+        divCount={8}
         curve="bezier"
         exponential={true}
         opacity={1}
