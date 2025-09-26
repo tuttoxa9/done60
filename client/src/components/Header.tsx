@@ -11,10 +11,9 @@ export default function Header() {
   const [location, navigate] = useLocation();
 
   return (
-    <section style={{position: 'sticky', top: 0, height: 'auto', overflow: 'hidden', zIndex: 50}}>
-      <div style={{ height: '100%', overflowY: 'auto', padding: '0.75rem 0' }}>
-        {/* Контент поверх блюр эффекта */}
-        <div className="container-custom flex justify-between items-center relative z-10">
+    <>
+      <header className="sticky top-0 z-50 w-full bg-transparent">
+        <div className="container-custom py-3 flex justify-between items-center relative z-50">
           <div>
             <Link href="/">
               <div className="text-3xl font-bold flex items-center gap-2 relative">
@@ -64,17 +63,19 @@ export default function Header() {
             </SheetContent>
           </Sheet>
         </div>
-      </div>
+      </header>
 
-      <GradualBlur
-        target="parent"
-        preset="header"
-        strength={3}
-        divCount={8}
-        curve="bezier"
-        exponential={true}
-        opacity={1}
-      />
-    </section>
+      <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none">
+        <GradualBlur
+          position="bottom"
+          height="8rem"
+          strength={3}
+          divCount={10}
+          curve="bezier"
+          exponential={true}
+          opacity={1}
+        />
+      </div>
+    </>
   );
 }
