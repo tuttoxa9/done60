@@ -303,7 +303,7 @@ export default function ThankYou() {
                 Написать в Telegram
               </a>
               <a
-                href="tel:+375"
+                href="tel:+375297165584"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all duration-300 shadow-lg"
               >
                 <Phone className="h-5 w-5" />

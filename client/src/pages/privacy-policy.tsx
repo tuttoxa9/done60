@@ -132,7 +132,7 @@ export default function PrivacyPolicy() {
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-700">
                     <strong>Email:</strong> privacy@unictaste.ru<br/>
-                    <strong>Адрес:</strong> г. Минск, ул. Игнатенко 7
+                    <strong>Адрес:</strong> г. Минск, ул. Казинца 6, каб 108
                   </p>
                 </div>
               </section>
