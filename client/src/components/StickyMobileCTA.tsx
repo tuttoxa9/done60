@@ -48,7 +48,7 @@ export default function StickyMobileCTA() {
 
   // Открыть Telegram
   const openTelegram = () => {
-    window.open('https://t.me/xtxa666', '_blank');
+    window.open('https://t.me/Orlova_1313', '_blank');
   };
 
   // Обработка изменения номера телефона
