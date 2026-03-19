@@ -115,7 +115,7 @@ export default function Footer() {
                 <div>
                   <p className="text-sm text-slate-400 mb-1">Телефон</p>
                   <a href="tel:+375297165584" className="text-white hover:text-secondary transition-all duration-300 block">+375 29 716-55-84</a>
-                  <a href="https://t.me/xtxa666" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all duration-300 flex items-center mt-1">
+                  <a href="https://t.me/Orlova_1313" target="_blank" rel="noopener noreferrer" className="text-white hover:text-secondary transition-all duration-300 flex items-center mt-1">
                     <MessageCircle className="h-4 w-4 mr-1.5 text-secondary" />
                     <span className="text-sm">Написать в Телеграм</span>
                   </a>
