@@ -176,7 +176,7 @@ export default function TermsOfService() {
                   <p className="text-gray-700">
                     <strong>Служба поддержки:</strong> support@unictaste.ru<br/>
                     <strong>Вопросы по трудоустройству:</strong> hr@unictaste.ru<br/>
-                    <strong>Адрес:</strong> г. Минск, ул. Игнатенко 7<br/>
+                    <strong>Адрес:</strong> г. Минск, ул. Казинца 6, каб 108<br/>
                     <strong>Время работы:</strong> Пн-Пт 9:00-18:00
                   </p>
                 </div>
