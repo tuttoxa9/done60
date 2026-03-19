@@ -59,7 +59,7 @@ export default defineConfig({
     // но мы всё равно стараемся держать их маленькими
     chunkSizeWarningLimit: 600,
     // Улучшаем производительность и совместимость
-    target: 'es2015',
+    target: 'es2020',
     cssCodeSplit: true,
     assetsInlineLimit: 4096, // 4kb - маленькие ассеты инлайним
     sourcemap: false, // в production не нужны source maps
